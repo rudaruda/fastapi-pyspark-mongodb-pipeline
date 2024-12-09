@@ -50,16 +50,16 @@ Temos um dockerfile com imagem python:3.12-slim que sustenta nossa aplicação e
 O MongoExpress esta aqui somente como utilitario, para visualizar os dados persistidos no MongoDB. 
 
 ### O que é FastAPI
-<img src="image/fastapi_icon.png" alt="Alt Text" style="width:50px; height:auto;float: left; margin-right: 15px;"> [FastAPI](https://fastapi.tiangolo.com/) é um framework web Python, rápido e moderno, para criar APIs com suporte a validações automáticas e documentação integrada.
+<img src="image/fastapi_icon.png" alt="fastapi icon" style="width:25px;"\> [FastAPI](https://fastapi.tiangolo.com/) é um framework web Python, rápido e moderno, para criar APIs com suporte a validações automáticas e documentação integrada.
 
 ### O que é PySpark
-| ![pyspark icon >](image/pyspark_icon.png) | [PySpark](https://spark.apache.org/docs/latest/api/python/index.html) é a API do Apache Spark para Python, usada para processamento distribuído de grandes volumes de dados. |
+<img src="image/pyspark_icon.png" alt="pyspark icon" style="width:25px;"\> [PySpark](https://spark.apache.org/docs/latest/api/python/index.html) é a API do Apache Spark para Python, usada para processamento distribuído de grandes volumes de dados.
 
 ### O que é MongoDB
-| ![mongodb icon >](image/mongodb_icon.jpg) | [MongoDB](https://www.mongodb.com/pt-br/docs/manual/administration/install-community/) é um banco de dados NoSQL orientado a documentos, que armazena dados em formato JSON-like (BSON), permitindo flexibilidade e escalabilidade para aplicações modernas. |
+<img src="image/mongodb_icon.jpg" alt="mongodb icon" style="width:25px;"\> [MongoDB](https://www.mongodb.com/pt-br/docs/manual/administration/install-community/) é um banco de dados NoSQL orientado a documentos, que armazena dados em formato JSON-like (BSON), permitindo flexibilidade e escalabilidade para aplicações modernas. |
 
 ### O que é Docker
-| ![docker icon >](image/docker_icon.jpg) | [Docker](https://www.docker.com/) é uma plataforma para criar, distribuir e executar aplicativos em contêineres isolados. |
+<img src="image/docker_icon.jpg" alt="docker icon" style="width:25px;"\> ![docker icon >](image/docker_icon.jpg) | [Docker](https://www.docker.com/) é uma plataforma para criar, distribuir e executar aplicativos em contêineres isolados.
 
 ### Algumas ferramentas utilizadas na construção
 * Docker / Podman
