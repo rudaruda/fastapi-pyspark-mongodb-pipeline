@@ -1,0 +1,60 @@
+version: '3'
+services:
+  fastapi-pipeline:
+    container_name: fastapi-spark-pipeline
+    build: ./
+    working_dir: /code
+    volumes:
+      - .:/code
+    command: ["uvicorn", "app.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
+    env_file:
+      - .env
+    networks:
+      - backend
+    ports:
+      - 8000:8000
+    environment:
+      - ENVIRONMENT=dev
+
+  mongodb:
+    container_name: mongodb
+    image: mongo:8
+    restart: unless-stopped
+    volumes:
+      - ./data/mongo_data:/data/db
+      - ./data/mongod.conf:/etc/mongo/mongod.conf
+    command: [ "mongod", "--config", "/etc/mongo/mongod.conf" ]
+    env_file:
+      - .env
+    ports:
+      - 27017:27017
+    networks:
+      - backend
+    # Supressão de log
+    logging:
+      driver: "none"
+
+
+  mongo-express:
+    container_name: project.api-mongo_express
+    image: mongo-express:1.0.0
+    restart: unless-stopped
+    ports:
+      - 8081:8081
+    networks:
+      - backend
+    env_file:
+      - .env
+    depends_on:
+      - mongodb
+    # Supressão de log  
+    logging:
+      driver: "none"
+
+
+networks:
+  backend:
+    driver: bridge
+
+#volumes:
+#  mongo_data:
