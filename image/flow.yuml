@@ -1,0 +1,5 @@
+// {type:activity}
+// {direction:leftToRight}
+(start)->(EventProcessor\nprocess_events)->(Aggregator\naggregate_data)->(Writer\nwrite)->(end)
+(EventProcessor\nprocess_events)->(MongoDB)->(Aggregator\naggregate_data)->(MongoDB)
+(MongoDB)->(Writer\nwrite)

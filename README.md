@@ -53,35 +53,44 @@ O MongoExpress esta aqui somente como utilitario, para visualizar os dados persi
 <img src="image/fastapi_icon.png" alt="fastapi icon" style="width:25px;"\> [FastAPI](https://fastapi.tiangolo.com/) é um framework web Python, rápido e moderno, para criar APIs com suporte a validações automáticas e documentação integrada.
 
 ### O que é PySpark
-<img src="image/pyspark_icon.png" alt="pyspark icon" style="width:25px;"\> [PySpark](https://spark.apache.org/docs/latest/api/python/index.html) é a API do Apache Spark para Python, usada para processamento distribuído de grandes volumes de dados.
+<img src="image/pyspark_icon.png" alt="pyspark icon" style="width:25px; height:100%"> [PySpark](https://spark.apache.org/docs/latest/api/python/index.html) é a API do Apache Spark para Python, usada para processamento distribuído de grandes volumes de dados.
 
 ### O que é MongoDB
 <img src="image/mongodb_icon.jpg" alt="mongodb icon" style="width:25px; height:100%"> [MongoDB](https://www.mongodb.com/pt-br/docs/manual/administration/install-community/) é um banco de dados NoSQL orientado a documentos, que armazena dados em formato JSON-like (BSON), permitindo flexibilidade e escalabilidade para aplicações modernas. |
 
 ### O que é Docker
-<img src="image/docker_icon.jpg" alt="docker icon" width="25"> ![docker icon >](image/docker_icon.jpg) | [Docker](https://www.docker.com/) é uma plataforma para criar, distribuir e executar aplicativos em contêineres isolados.
+<img src="image/docker_icon.jpg" alt="docker icon" style="width:25px; height:100%"> ![docker icon >](image/docker_icon.jpg) | [Docker](https://www.docker.com/) é uma plataforma para criar, distribuir e executar aplicativos em contêineres isolados.
 
 
+## Fluxo de Processamento
+![caso d euso](image/caseuse.png)
 
-## API documentation (provided by Swagger UI)
-
-```
-http://127.0.0.1:8000/docs
-```
+O diagrama apresenta o fluxo de processamento do pipeline.
+Básicamente é executado pelos métodos:
+1. [EventProcessor.process_events()](http://localhost:8000/docs#/Main/evt_process_events_eventprocessor_process_events__get)
+   TESTES ASDF ASDF 
+2. [Aggregator.aggregate_data()](http://localhost:8000/docs#/Main/agg_aggregate_data_aggregator_aggregate_data__get)
+3. [Write.write_data()](http://localhost:8000/docs#/Main/wrt_write_data_writer_write_data__get)
 
 Prints de caso de uso
+
+## Documentação da API (Swagger UI)
+
+```
+http://localhost:8000/docs
+```
 
 # api-pipeline-fastapi
 EventProcessor, Aggregator, Writer com FastApi lendo arquivos Json
 
-fastapi
-    ├── docker-compose.yml
-    └── src
-        ├── Dockerfile
-        ├── app
-        │   ├── __init__.py
-        │   └── main.py
-        └── requirements.txt
+> fastapi
+>    ├── docker-compose.yml
+>    └── src
+>        ├── Dockerfile
+>        ├── app
+>        │   ├── __init__.py
+>        │   └── main.py
+>        └── requirements.txt
 
 """"
 http://127.0.0.1:8000/eventprocessor/1-loadfile
