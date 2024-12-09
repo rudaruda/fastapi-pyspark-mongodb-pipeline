@@ -5,10 +5,10 @@ Básicamente a ideia é manipular os dados com PYSPARK armazenada snap_shot do D
 E no final apresentar a evolução do pipeline de forma visualmente (isso mesmo em HTML como se fosse um front).
 
 ## Como utilizar
-* Necessário ter Docker e Docker-compose instalado;
-* Utilizar o comando `docker-compose up` ou `podman-compose up` no diretório do repositório;
-* Aplicação roda em [http://0.0.0.0:8000/](http://0.0.0.0:8000/) ou [http://localhost:8000/](http://localhost:8000/) por padrão;
-* Verificar a [documentação](http://localhost:8000/docs) (rota `/` ou  `/docs`);
+* Necessário ter Docker e Docker-compose (ou Podman + Podman Compose) instalado
+* Utilizar o comando `docker-compose up` ou `podman-compose up` no diretório do repositório
+* Aplicação roda em [http://0.0.0.0:8000/](http://0.0.0.0:8000/) ou [http://localhost:8000/](http://localhost:8000/) por padrão
+* Verificar a [documentação](http://localhost:8000/docs): ([http://localhost:8000/docs](http://localhost:8000/docs));
 * Caso queira rodar fora do Container, instalar as biblitecas `requirements.txt` e execute os arquivos em python.
 
 ### Pré-requisitos:
@@ -45,10 +45,12 @@ Ou executando o metodo Test.execute()
 
 # Arquitetura da solução
 ![arquitetura](image/pipeline-fastapi-arquitetura.drawio.png)
+
 Temos um dockerfile com imagem python:3.12-slim que sustenta nossa aplicação em Python com FastAPI. Por sua vez esta se conectando com PySpark e realiza a manipulação de dados. A cada alteração do DataFrame é persisitindo um snap-shop dos dados no MongoDB. 
 O MongoExpress esta aqui somente como utilitario, para visualizar os dados persistidos no MongoDB. 
 
 ### O que é FastAPI
+<img src="image/fastapi_icon.png" alt="Alt Text" style="width:30px; height:auto;">
 | ![fastapi icon >](image/fastapi_icon.png) | [FastAPI](https://fastapi.tiangolo.com/) é um framework web Python, rápido e moderno, para criar APIs com suporte a validações automáticas e documentação integrada. |
 
 ### O que é PySpark
