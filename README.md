@@ -37,8 +37,10 @@ podman-compose run up
 ```
 
 ### Testes
+![Pipeline](image/testes-compress.gif)
 Todos os testes podem ser executados diretamente pelo Swagger:
 - [localhost:8000/docs/Testes/test_all](localhost:8000/docs/Testes/test_all)
+    > Importante dizer que lá a documentação esta completa também.
 Ou executando o metodo Test.execute() 
 - em "/app/tests/test.py"
 
@@ -61,67 +63,49 @@ O MongoExpress esta aqui somente como utilitario, para visualizar os dados persi
 ### O que é Docker
 <img src="image/docker_icon.jpg" alt="docker icon" style="width:25px; height:100%"> ![docker icon >](image/docker_icon.jpg) | [Docker](https://www.docker.com/) é uma plataforma para criar, distribuir e executar aplicativos em contêineres isolados.
 
-
 ## Fluxo de Processamento
 ![caso d euso](image/caseuse.png)
 
-O diagrama apresenta o fluxo de processamento do pipeline.
-Básicamente é executado pelos métodos:
+O diagrama representa o fluxo de processamento do pipeline, exatamente nessa sequencia:
 1. [EventProcessor.process_events()](http://localhost:8000/docs#/Main/evt_process_events_eventprocessor_process_events__get)
-  > TESTES ASDF ASDF 
+    > Método que realiza o carregamento do arquivo JSON, tratamento dos dados (limpeza e enriquecimento) e filtros
 2. [Aggregator.aggregate_data()](http://localhost:8000/docs#/Main/agg_aggregate_data_aggregator_aggregate_data__get)
-    fasdf asdf
+    > Método de analise e relatórios
 3. [Write.write_data()](http://localhost:8000/docs#/Main/wrt_write_data_writer_write_data__get)
-    > asdf
+    > Método que processamento do arquivo Parquet, no caso precisei adaptar para tivesse saída em FileResponse/Download.
 
+# Pipeline
+![Pipeline](image/pipeline-compress.gif)
+Você pode executar a pipeline através da URL com visualização HTML: 
+- [http://localhost:8000/pipe_show](http://localhost:8000/pipe_show)
+    > Aqui esta sendo executado process_events, aggregate_data e write_data em sequencia. No final aparece link para fazer Download do arquivo Parquet ou Visualizar os Insights.
+Para visualizar os insights vovcê deve acessar a URL: 
+- [http://localhost:8000/pipe_insights](http://localhost:8000/pipe_insights)
+    > É executando as analises: 
 Prints de caso de uso
 
 ## Documentação da API (Swagger UI)
-
+![arquitetura](image/docs.png)
 ```
 http://localhost:8000/docs
 ```
+O Swagger que fica disponível assim que a aplicação fica ativa com o comando em Docker/Podman:
+```
+podman-compose up
+```
+Lá temos detalhe de cada endpoint/função do Pipeline agrupadas por Tags/Funcionalidade. Você pode realizar as execuções de cada etapa diretamente por lá (inclusive é muito fácil).
 
-# api-pipeline-fastapi
-EventProcessor, Aggregator, Writer com FastApi lendo arquivos Json
-
-  > fastapi
-  >    ├── docker-compose.yml
->    └── src
->        ├── Dockerfile
->        ├── app
->        │   ├── __init__.py
->        │   └── main.py
->        └── requirements.txt
-
-    fastapi
+# Estrutura principal do projeto
+    projeto
     ├── docker-compose.yml
-    └── src
-        ├── Dockerfile
-        ├── app
-        │   ├── __init__.py
-        │   └── main.py
-        └── requirements.txt
-
-""""
-http://127.0.0.1:8000/eventprocessor/1-loadfile
-
-http://127.0.0.1:8000/eventprocessor/2-searchitemlist/
-
-http://127.0.0.1:8000/eventprocessor/3-featurecols/
-
-http://127.0.0.1:8000/eventprocessor/4-futuredeparture
-
-http://127.0.0.1:8000/eventprocessor/5-availableseats
-
-http://127.0.0.1:8000/aggregator/6-avgrota
-
-http://127.0.0.1:8000/aggregator/7-availableseats
-
-http://127.0.0.1:8000/aggregator/8-popularroute
-
-http://127.0.0.1:8000/eventprocessor/10-process_events
-
-http://127.0.0.1:8000/aggregator/11-aggregate_data
-
-"""
+    ├── dockerfile.yml
+    ├── requirements.yml
+    └── app
+        ├── __init__.py
+        ├── main.py
+        ├── api
+        │   └── aggregator.py
+        │   └── eventProcessor.py
+        │   └── writer.py
+        ├── test
+            └── test.py

@@ -112,35 +112,45 @@ class Tests:
                 t.add(v)
                 print(v)
                 c+=1
+            else:
+                t.add('Simples carregamento de arquivo JSON: OK!')
             
             if self.test(enviroment_get) is False: 
                 v='Falha ENVIRONMENTS VARS'
                 t.add(v)
                 print(v)
                 c+=1
+            else:
+                t.add('Teste variavéis de ambiente: OK!')
             
             if self.test(mongodb_insert) is False: 
                 v='Falha MONGO'
                 t.add(v)
                 print(v)
                 c+=1
+            else:
+                t.add('Conectividade com MongoDB: OK!')
             
             if self.test(spark_create_dataframe) is False: 
                 v='Falha SPARK, create dataframe'
                 t.add(v)
                 print(v)
                 c+=1
+            else:
+                t.add('Conectividade com SPARK: OK!')
             
             if self.test(spark_load_file) is False: 
                 v='Falha SPARK, load file'
                 t.add(v)
                 print(v)
                 c+=1
+            else:
+                t.add('Teste de carregar arquivo JSON com SPARK: OK!')
             
             # Verificando o estado dos testes
             if c==0:
                 v='Tudo OK!'
-                t={v}
+                t.add(v)
                 print(v)
             
             return t
