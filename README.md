@@ -18,9 +18,10 @@ E no final apresentar a evolução do pipeline de forma visualmente (isso mesmo 
 
 #### Instalandol as dependencies
 
-Depende do sistema operacional. Acesse o site dos desenvolvedores para mais informações:
- - [docker/get-start](https://docs.docker.com/get-started/get-docker/)
- - [podman/installation](https://podman.io/docs/installation)
+Depende do sistema operacional, acesse o site dos desenvolvedores para mais informação:
+ - [Docker/get-start](https://docs.docker.com/get-started/get-docker/)
+ - [Podman/installation](https://podman.io/docs/installation)
+ - [Java]{!https://www.java.com/download/ie_manual.jsp}
 
 ### Executando localmente
 - Clone o projeto:
@@ -70,14 +71,15 @@ O MongoExpress esta aqui somente como utilitario, para visualizar os dados persi
 
 O diagrama representa o fluxo completo de processamento da Pipeline, que é exatamente nessa sequencia:
 1. [EventProcessor.process_events()](http://localhost:8000/docs#/Main/evt_process_events_eventprocessor_process_events__get)
-    > Método que realiza o carregamento do arquivo JSON, tratamento dos dados (limpeza e enriquecimento) e filtros
+    > Método que realiza o carregamento do arquivo JSON, tratamento dos dados (limpeza e enriquecimento) e filtro do registros
 2. [Aggregator.aggregate_data()](http://localhost:8000/docs#/Main/agg_aggregate_data_aggregator_aggregate_data__get)
     > Método de analise e relatórios: preço médio por rota e classe de serviço, total de assentos disponíveis por rota e companhia e rota mais popular por companhia de viagem.
 3. [Write.write_data()](http://localhost:8000/docs#/Main/wrt_write_data_writer_write_data__get)
     > Método que processamento do arquivo Parquet, no caso precisei adaptar para tivesse saída em FileResponse/Download.
 
-**Reforçando!** Pelo Swagger pode executar, pontualmente cada um desses métodos. 
-Basca acessar o endpoint no link do item acima, depois (no Swagger) em "try" -> "execute"
+![caso d euso](image/fluxo.gif)
+
+**Reforçando!** Pelo Swagger pode executar, pontualmente cada um desses métodos. Basca acessar o endpoint no link do item acima, depois (no Swagger) em "try" -> "execute". A animação em cima esclarece melhor em caso de dúvida.
 
 # Pipeline
 ![Pipeline](image/pipeline-compress.gif)
@@ -89,12 +91,15 @@ Para visualizar os insights vovcê deve acessar a URL:
 - [http://localhost:8000/pipe_insights](http://localhost:8000/pipe_insights)
     > É executando as analises: relatório de preço médio por rota e classe de serviço, total de assentos disponíveis por rota e companhia e rota mais popular por companhia de viagem.
 
-## Documentação da API (Swagger UI)
+## Documentação da API (Swagger)
 ![arquitetura](image/docs.png)
 ```
 http://localhost:8000/docs
 ```
-O Swagger que fica disponível assim que a aplicação é executada com o comando em Docker/Podman:
+O Swagger fica disponível assim que a aplicação é executada com o comando em Docker/Podman:
+```
+docker-compose up
+```
 ```
 podman-compose up
 ```
