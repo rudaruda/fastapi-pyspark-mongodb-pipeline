@@ -82,7 +82,7 @@ O diagrama representa o fluxo completo de processamento da Pipeline, que é exat
 **Reforçando!** Pelo Swagger pode executar, pontualmente cada um desses métodos. Basca acessar o endpoint no link do item acima, depois (no Swagger) em "try" -> "execute". A animação em cima esclarece melhor em caso de dúvida.
 
 # Pipeline
-![Pipeline](image/pipeline-compress.gif)
+![Pipeline](image/pipeline-speed.gif)
 
 Você pode executar a pipeline através da URL com visualização HTML: 
 - [http://localhost:8000/pipe_show](http://localhost:8000/pipe_show)

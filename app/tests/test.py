@@ -108,44 +108,44 @@ class Tests:
             c, t = 0, set()
             # Testando diferentes funções e atualizando o set de falhas
             if self.test(read_file_json) is False: 
-                v='Falha Arquivo JSON'
+                v='1. Falha Arquivo JSON'
                 t.add(v)
                 print(v)
                 c+=1
             else:
-                t.add('Simples carregamento de arquivo JSON: OK!')
+                t.add('1. Simples carregamento de arquivo JSON: OK!')
             
             if self.test(enviroment_get) is False: 
-                v='Falha ENVIRONMENTS VARS'
+                v='2. Falha ENVIRONMENTS VARS'
                 t.add(v)
                 print(v)
                 c+=1
             else:
-                t.add('Teste variavéis de ambiente: OK!')
+                t.add('2. Teste variavéis de ambiente: OK!')
             
             if self.test(mongodb_insert) is False: 
-                v='Falha MONGO'
+                v='3. Falha MONGO'
                 t.add(v)
                 print(v)
                 c+=1
             else:
-                t.add('Conectividade com MongoDB: OK!')
+                t.add('3. Conectividade com MongoDB: OK!')
             
             if self.test(spark_create_dataframe) is False: 
-                v='Falha SPARK, create dataframe'
+                v='4. Falha SPARK, create dataframe'
                 t.add(v)
                 print(v)
                 c+=1
             else:
-                t.add('Conectividade com SPARK: OK!')
+                t.add('4. Conectividade com SPARK: OK!')
             
             if self.test(spark_load_file) is False: 
-                v='Falha SPARK, load file'
+                v='5. Falha SPARK, load file'
                 t.add(v)
                 print(v)
                 c+=1
             else:
-                t.add('Teste de carregar arquivo JSON com SPARK: OK!')
+                t.add('5. Teste de carregar arquivo JSON com SPARK: OK!')
             
             # Verificando o estado dos testes
             if c==0:
