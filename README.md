@@ -21,7 +21,7 @@ E no final apresentar a evolução do pipeline de forma visualmente (isso mesmo 
 Depende do sistema operacional, acesse o site dos desenvolvedores para mais informação:
  - [Docker/get-start](https://docs.docker.com/get-started/get-docker/)
  - [Podman/installation](https://podman.io/docs/installation)
- - [Java]{!https://www.java.com/download/ie_manual.jsp}
+ - [Java](!https://www.java.com/download/ie_manual.jsp)
 
 ### Executando localmente
 - Clone o projeto:
@@ -66,7 +66,7 @@ O MongoExpress esta aqui somente como utilitario, para visualizar os dados persi
 ##### O que é Podman
 <img src="image/podman_icon.png" alt="podman icon" style="width:25px; height:100%"> [Podman](https://podman.io/get-started) tem o mesmo objetivo do Docker, incluive possui alta compatibilidade (mesmos comandos) que o Docker, porém consume menos recursos de máquina no desenvolvimento local **(super recomendo!)** :rocket:.
 
-## Fluxo de Processamento
+## Caso de Uso: Fluxo de Processamento
 ![caso d euso](image/case-use.png)
 
 O diagrama representa o fluxo completo de processamento da Pipeline, que é exatamente nessa sequencia:
