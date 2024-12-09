@@ -7,68 +7,58 @@ E no final apresentar a evolução do pipeline de forma visualmente (isso mesmo 
 ## Como utilizar
 * Necessário ter Docker e Docker-compose instalado;
 * Utilizar o comando `docker-compose up` ou `podman-compose up` no diretório do repositório;
-* Aplicação roda em [0.0.0.0:8000/](0.0.0.0:8000/) por padrão;
-* Verificar a [documentação](0.0.0.0:8000/docs) (rota `/` ou  `/docs`);
+* Aplicação roda em [http://0.0.0.0:8000/](http://0.0.0.0:8000/) ou [http://localhost:8000/](http://localhost:8000/) por padrão;
+* Verificar a [documentação](http://localhost:8000/docs) (rota `/` ou  `/docs`);
 * Caso queira rodar fora do Container, instalar as biblitecas `requirements.txt` e execute os arquivos em python.
 
-### Pré-requisito:
+### Pré-requisitos:
 
 - DOCKER / PODMAN 
 - JAVA 11
 
-##### Instalandoll as dependencies
+#### Instalandol as dependencies
 
-Variavel por sistema operacional.
-Acesse o site dos desenvolvedores para mais informações:
+Depende do sistema operacional. Acesse o site dos desenvolvedores para mais informações:
  - [docker/get-start](https://docs.docker.com/get-started/get-docker/)
- - [podman/installation]https://podman.io/docs/installation
-
+ - [podman/installation](https://podman.io/docs/installation)
 
 ### Executando localmente
 - Clone o projeto:
-  ```
-  git clone x
-  ```
- Execute o conteiner com DOCKER:
- ```
- docker run x
- ```
+```
+git clone https://github.com/rudaruda/fastapi-pyspark-mongodb-pipeline.git
+```
+Estando no diretório do projeto, execute o conteiner com DOCKER:
+```
+docker-compose up
+```
 ... ou com PODMAN:
 ```
-podman-compose run x
+podman-compose run up
 ```
 
 ### Testes
-Todos os testes são executados via URL:
-- 
-- 
-- 
+Todos os testes podem ser executados diretamente pelo Swagger:
+- [localhost:8000/docs/Testes/test_all](localhost:8000/docs/Testes/test_all)
+Ou executando o metodo Test.execute() 
+- em "/app/tests/test.py"
 
-## Run with docker
-
-### Run server
-
-```
-docker-compose up -d --build
-```
-
-### Run test
-
-```
-docker run -p 8000:8000 --network backend -it fastapi-pipeline --network backend
-```
-docker-compose exec app pytest test/test.py
-
-
-podman network connect --ip 0.0.0.0:27017 -- ip 0.0.0.0:8000
-
-docker network connect --ip 10.10.36.122 multi-host-network container2
-
-podman network inspect nome_da_rede
 
 # Arquitetura da solução
-[Desenho]
-Resumo da explicação
+![arquitetura](image/pipeline-fastapi-arquitetura.drawio.png)
+Temos um dockerfile com imagem python:3.12-slim que sustenta nossa aplicação em Python com FastAPI. Por sua vez esta se conectando com PySpark e realiza a manipulação de dados. A cada alteração do DataFrame é persisitindo um snap-shop dos dados no MongoDB. 
+O MongoExpress esta aqui somente como utilitario, para visualizar os dados persistidos no MongoDB. 
+
+### O que é FastAPI
+| ![fastapi icon >](image/fastapi_icon.png) | [FastAPI](https://fastapi.tiangolo.com/) é um framework web Python, rápido e moderno, para criar APIs com suporte a validações automáticas e documentação integrada. |
+
+### O que é PySpark
+| ![pyspark icon >](image/pyspark_icon.png) | [PySpark](https://spark.apache.org/docs/latest/api/python/index.html) é a API do Apache Spark para Python, usada para processamento distribuído de grandes volumes de dados. |
+
+### O que é MongoDB
+| ![mongodb icon >](image/mongodb_icon.jpg) | [MongoDB](https://www.mongodb.com/pt-br/docs/manual/administration/install-community/) é um banco de dados NoSQL orientado a documentos, que armazena dados em formato JSON-like (BSON), permitindo flexibilidade e escalabilidade para aplicações modernas. |
+
+### O que é Docker
+| ![docker icon >](image/docker_icon.jpg) | [Docker](https://www.docker.com/) é uma plataforma para criar, distribuir e executar aplicativos em contêineres isolados. |
 
 ### Algumas ferramentas utilizadas na construção
 * Docker / Podman
@@ -87,12 +77,6 @@ http://127.0.0.1:8000/docs
 ```
 
 Prints de caso de uso
-
-### Run server
-
-```
-docker-compose exec db psql --username=fastapi --dbname=fastapi_dev
-```
 
 # api-pipeline-fastapi
 EventProcessor, Aggregator, Writer com FastApi lendo arquivos Json
