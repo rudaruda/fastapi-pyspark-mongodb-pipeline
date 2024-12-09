@@ -68,9 +68,11 @@ O MongoExpress esta aqui somente como utilitario, para visualizar os dados persi
 O diagrama apresenta o fluxo de processamento do pipeline.
 Básicamente é executado pelos métodos:
 1. [EventProcessor.process_events()](http://localhost:8000/docs#/Main/evt_process_events_eventprocessor_process_events__get)
-   TESTES ASDF ASDF 
+  > TESTES ASDF ASDF 
 2. [Aggregator.aggregate_data()](http://localhost:8000/docs#/Main/agg_aggregate_data_aggregator_aggregate_data__get)
+    fasdf asdf
 3. [Write.write_data()](http://localhost:8000/docs#/Main/wrt_write_data_writer_write_data__get)
+    > asdf
 
 Prints de caso de uso
 
@@ -83,14 +85,23 @@ http://localhost:8000/docs
 # api-pipeline-fastapi
 EventProcessor, Aggregator, Writer com FastApi lendo arquivos Json
 
-> fastapi
->    ├── docker-compose.yml
+  > fastapi
+  >    ├── docker-compose.yml
 >    └── src
 >        ├── Dockerfile
 >        ├── app
 >        │   ├── __init__.py
 >        │   └── main.py
 >        └── requirements.txt
+
+    fastapi
+    ├── docker-compose.yml
+    └── src
+        ├── Dockerfile
+        ├── app
+        │   ├── __init__.py
+        │   └── main.py
+        └── requirements.txt
 
 """"
 http://127.0.0.1:8000/eventprocessor/1-loadfile
