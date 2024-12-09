@@ -1,6 +1,6 @@
 # fastapi-pyspark-mongodb-pipeline 
 
-Projeto experimental de pipeline com FASTAPI + PYSPARK + MONGODB.
+Projeto experimental de **Pipeline de dados** com **FASTAPI + PYSPARK + MONGODB**.
 Básicamente a ideia é manipular os dados com PYSPARK armazenada snap_shot do DataFrames no MONGODB a cada transformação. 
 E no final apresentar a evolução do pipeline de forma visualmente (isso mesmo em HTML como se fosse um front).
 
@@ -31,7 +31,7 @@ Estando no diretório do projeto, execute o conteiner com DOCKER:
 ```
 docker-compose up
 ```
-...ou... com PODMAN *(recomendo o uso)*:
+...ou com PODMAN *(recomendo)*:
 ```
 podman-compose run up
 ```
@@ -41,35 +41,34 @@ podman-compose run up
 
 Todos os testes podem ser executados diretamente pelo Swagger:
 - [localhost:8000/docs/Testes/test_all](http://localhost:8000/docs#/Testes/mongodb_test_all_get)
-    > Importante dizer que temos lá a documentação mais detalhada de cada serviço/funcionalidade.
-- Ou executando o metodo Test.execute() 
-- "/app/tests/test.py"
+    > Reforço que temos no Swagger a documentação mais detalhada de cada serviço/funcionalidade.
+- Ou executando o metodo `Test.execute()` em `/app/tests/test.py`
 
 # Arquitetura da solução
 ![arquitetura](image/pipeline-fastapi-arquitetura.drawio.png)
 
-**Dockerfile** com imagem python:3.12-slim que sustenta nossa aplicação em **Python** com **FastAPI**. Por sua vez esta se conectando com **PySpark** e realiza a manipulação de dados. A cada alteração do DataFrame é persisitindo um snap-shop dos dados no **MongoDB**. 
+**Dockerfile** com imagem *python:3.12-slim* que sustenta nossa aplicação em **Python** com **FastAPI**. Por sua vez esta se conectando com **PySpark** e realiza a manipulação de dados. A cada alteração do DataFrame é persisitindo um snap-shop dos dados no **MongoDB**. 
 O MongoExpress esta aqui somente como utilitario, para visualizar os dados persistidos no MongoDB. 
 
-#### O que é FastAPI
+##### O que é FastAPI
 <img src="image/fastapi_icon.png" alt="fastapi icon" style="width:25px; height:100%"> [FastAPI](https://fastapi.tiangolo.com/) é um framework web Python, rápido e moderno, para criar APIs com suporte a validações automáticas e documentação integrada.
 
-#### O que é PySpark
+##### O que é PySpark
 <img src="image/pyspark_icon.png" alt="pyspark icon" style="width:25px; height:100%"> [PySpark](https://spark.apache.org/docs/latest/api/python/index.html) é a API do Apache Spark para Python, usada para processamento distribuído de grandes volumes de dados.
 
 ##### O que é MongoDB
 <img src="image/mongodb_icon.jpg" alt="mongodb icon" style="width:25px; height:100%"> [MongoDB](https://www.mongodb.com/pt-br/docs/manual/administration/install-community/) é um banco de dados NoSQL orientado a documentos, que armazena dados em formato JSON-like (BSON), permitindo flexibilidade e escalabilidade para aplicações modernas. Vamos além de "na minha máquina funciona" :blush:
 
-### O que é Docker
+##### O que é Docker
 <img src="image/docker_icon.png" alt="docker icon" style="width:25px; height:100%"> [Docker](https://www.docker.com/get-started/) é uma plataforma para criar, distribuir e executar aplicativos em contêineres isolados.
 
-### O que é Podman
+##### O que é Podman
 <img src="image/podman_icon.png" alt="podman icon" style="width:25px; height:100%"> [Podman](https://podman.io/get-started) tem o mesmo objetivo do Docker, incluive possui alta compatibilidade (mesmos comandos) que o Docker, porém consume menos recursos de máquina no desenvolvimento local **(super recomendo!)** :rocket:.
 
 ## Fluxo de Processamento
 ![caso d euso](image/case-use.png)
 
-O diagrama representa o fluxo de processamento da Pipeline completa, que é exatamente a sequencia de:
+O diagrama representa o fluxo completo de processamento da Pipeline, que é exatamente nessa sequencia:
 1. [EventProcessor.process_events()](http://localhost:8000/docs#/Main/evt_process_events_eventprocessor_process_events__get)
     > Método que realiza o carregamento do arquivo JSON, tratamento dos dados (limpeza e enriquecimento) e filtros
 2. [Aggregator.aggregate_data()](http://localhost:8000/docs#/Main/agg_aggregate_data_aggregator_aggregate_data__get)
@@ -77,7 +76,8 @@ O diagrama representa o fluxo de processamento da Pipeline completa, que é exat
 3. [Write.write_data()](http://localhost:8000/docs#/Main/wrt_write_data_writer_write_data__get)
     > Método que processamento do arquivo Parquet, no caso precisei adaptar para tivesse saída em FileResponse/Download.
 
-**Reforçando!** Pelo Swagger pode executar, pontualmente cada um desses métodos. Basca acessar o endpoint no link do item acima, depois (no Swagger) em "try" -> "execute"
+**Reforçando!** Pelo Swagger pode executar, pontualmente cada um desses métodos. 
+Basca acessar o endpoint no link do item acima, depois (no Swagger) em "try" -> "execute"
 
 # Pipeline
 ![Pipeline](image/pipeline-compress.gif)
