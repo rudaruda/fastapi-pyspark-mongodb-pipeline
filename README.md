@@ -59,16 +59,8 @@ O MongoExpress esta aqui somente como utilitario, para visualizar os dados persi
 <img src="image/mongodb_icon.jpg" alt="mongodb icon" style="width:25px;"\> [MongoDB](https://www.mongodb.com/pt-br/docs/manual/administration/install-community/) é um banco de dados NoSQL orientado a documentos, que armazena dados em formato JSON-like (BSON), permitindo flexibilidade e escalabilidade para aplicações modernas. |
 
 ### O que é Docker
-<img src="image/docker_icon.jpg" alt="docker icon" style="width:25px;"\> ![docker icon >](image/docker_icon.jpg) | [Docker](https://www.docker.com/) é uma plataforma para criar, distribuir e executar aplicativos em contêineres isolados.
+<img src="image/docker_icon.jpg" alt="docker icon" width="25"> ![docker icon >](image/docker_icon.jpg) | [Docker](https://www.docker.com/) é uma plataforma para criar, distribuir e executar aplicativos em contêineres isolados.
 
-### Algumas ferramentas utilizadas na construção
-* Docker / Podman
-* Docker-compose / Podman-compose
-* PySpark
-* FastAPI
-* Uvicorn
-* Java 11
-* Python
 
 
 ## API documentation (provided by Swagger UI)
