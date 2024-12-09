@@ -50,7 +50,7 @@ Temos um dockerfile com imagem python:3.12-slim que sustenta nossa aplicação e
 O MongoExpress esta aqui somente como utilitario, para visualizar os dados persistidos no MongoDB. 
 
 ### O que é FastAPI
-<img src="image/fastapi_icon.png" alt="Alt Text" style="width:30px; height:auto;loat: left; margin-right: 15px;"> [FastAPI](https://fastapi.tiangolo.com/) é um framework web Python, rápido e moderno, para criar APIs com suporte a validações automáticas e documentação integrada.
+<img src="image/fastapi_icon.png" alt="Alt Text" style="width:50px; height:auto;float: left; margin-right: 15px;"> [FastAPI](https://fastapi.tiangolo.com/) é um framework web Python, rápido e moderno, para criar APIs com suporte a validações automáticas e documentação integrada.
 
 ### O que é PySpark
 | ![pyspark icon >](image/pyspark_icon.png) | [PySpark](https://spark.apache.org/docs/latest/api/python/index.html) é a API do Apache Spark para Python, usada para processamento distribuído de grandes volumes de dados. |
