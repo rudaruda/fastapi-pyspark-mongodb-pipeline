@@ -79,7 +79,7 @@ O diagrama representa o fluxo completo de processamento da Pipeline, que é exat
 
 ![caso d euso](image/fluxo.gif)
 
-**Reforçando!** Pelo Swagger pode executar, pontualmente cada um desses métodos. Basca acessar o endpoint no link do item acima, depois (no Swagger) em "try" -> "execute". A animação em cima esclarece melhor em caso de dúvida.
+**Reforçando!** Pelo Swagger pode executar, pontualmente cada um desses métodos. Basca acessar o endpoint no link do item acima, depois (no Swagger) em "Try it out" -> "Execute" -> Visualise o resultado em "Details". A animação em cima esclarece melhor em caso de dúvida.
 
 # Pipeline
 ![Pipeline](image/pipeline-speed.gif)

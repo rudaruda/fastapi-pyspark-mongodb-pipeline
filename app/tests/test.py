@@ -105,52 +105,52 @@ class Tests:
 
     def execute(self):
         try:
-            c, t = 0, set()
+            c, t = 0, []
             # Testando diferentes funções e atualizando o set de falhas
             if self.test(read_file_json) is False: 
-                v='1. Falha Arquivo JSON'
-                t.add(v)
+                v='Falha Arquivo JSON'
+                t.append(v)
                 print(v)
                 c+=1
             else:
-                t.add('1. Simples carregamento de arquivo JSON: OK!')
+                t.append('1. Simples carregamento de arquivo JSON: OK!')
             
             if self.test(enviroment_get) is False: 
-                v='2. Falha ENVIRONMENTS VARS'
-                t.add(v)
+                v='Falha ENVIRONMENTS VARS'
+                t.append(v)
                 print(v)
                 c+=1
             else:
-                t.add('2. Teste variavéis de ambiente: OK!')
+                t.append('Teste variavéis de ambiente: OK!')
             
             if self.test(mongodb_insert) is False: 
-                v='3. Falha MONGO'
+                v='Falha MONGO'
                 t.add(v)
                 print(v)
                 c+=1
             else:
-                t.add('3. Conectividade com MongoDB: OK!')
+                t.append('Conectividade com MongoDB: OK!')
             
             if self.test(spark_create_dataframe) is False: 
-                v='4. Falha SPARK, create dataframe'
-                t.add(v)
+                v='Falha SPARK, create dataframe'
+                t.append(v)
                 print(v)
                 c+=1
             else:
-                t.add('4. Conectividade com SPARK: OK!')
+                t.append('Conectividade com SPARK: OK!')
             
             if self.test(spark_load_file) is False: 
-                v='5. Falha SPARK, load file'
-                t.add(v)
+                v='Falha SPARK, load file'
+                t.append(v)
                 print(v)
                 c+=1
             else:
-                t.add('5. Teste de carregar arquivo JSON com SPARK: OK!')
+                t.append('Teste de carregar arquivo JSON com SPARK: OK!')
             
             # Verificando o estado dos testes
             if c==0:
                 v='Tudo OK!'
-                t.add(v)
+                t.append(v)
                 print(v)
             
             return t
