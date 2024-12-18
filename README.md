@@ -49,8 +49,8 @@ Considerações gerais:
 
 ### Pré-requisitos:
 
-- DOCKER / PODMAN 
-- JAVA 11
+- [Docker/get-start](https://docs.docker.com/get-started/get-docker/) ou [Podman/installation](https://podman.io/docs/installation)
+- [Podman/installation](https://podman.io/docs/installation)
 
 
 ### 1. Clone o projeto:
@@ -80,8 +80,7 @@ Estando no diretório do projeto, com **Docker** ou **Podman**:
 ##### 4.1 Instale as dependencias
 
 Depende do sistema operacional é preciso instalar os recursos Docker, Java, e MongoDB. Acesse o site dos desenvolvedores para mais informação:
-- [Docker/get-start](https://docs.docker.com/get-started/get-docker/)
-- [Podman/installation](https://podman.io/docs/installation)
+
 - [Java 11/download](https://www.java.com/download/ie_manual.jsp) _(versão 11)_
 - [MongoDB/tutorial](https://www.mongodb.com/pt-br/docs/manual/tutorial/)
 
