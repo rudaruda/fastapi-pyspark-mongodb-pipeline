@@ -1,8 +1,14 @@
 # fastapi-pyspark-mongodb-pipeline 
 
 Projeto experimental de **Pipeline de dados** com **FASTAPI + PYSPARK + MONGODB**.
-Basicamente a ideia é manipular os dados com PYSPARK armazenada snapshot do DataFrames no MONGODB a cada transformação. 
-E no final apresentar a evolução do pipeline de forma visualmente (isso mesmo em HTML como se fosse um front).
+
+Basicamente a ideia é manipular os Dados com PYSPARK armazenada snapshot do DataFrames no MONGODB a cada transformação.
+
+E no final além termos uma **API** da **Pipeline de Dados**, que pode ser executada via endpoint, apresentamos ela  visualmente (isso mesmo em HTML com **frontend**) no servidor web **uvicorn**.
+
+**Por que construir uma API de Dados?**
+
+Pela necessidade de conectar dados a outras plataformas devido ao suporte nativo a padrões amplamente usados, como JSON, OAuth2, e OpenAPI (Swagger). Isso facilita a integração com microserviços, sistemas externos e clientes API (como front-ends e aplicativos móveis), garantindo compatibilidade e comunicação eficiente.
 
 # Arquitetura
 ![arquitetura](image/pipeline-fastapi-arquitetura.drawio.png)
@@ -33,19 +39,6 @@ O MongoExpress esta aqui somente como utilitário, para visualizar os dados pers
         └── test
             └── test.py
 
-## Caso de uso: Fluxo de Processamento
-![caso de uso](image/case-use.png)
-
-O diagrama representa o fluxo completo de processamento da Pipeline, que é exatamente nessa sequencia:
-1. [EventProcessor.process_events()](http://localhost:8000/docs#/Main/evt_process_events_eventprocessor_process_events__get)
-    > Método que realiza o carregamento do arquivo JSON, tratamento dos dados (limpeza e enriquecimento) e filtro dos registros
-2. [Aggregator.aggregate_data()](http://localhost:8000/docs#/Main/agg_aggregate_data_aggregator_aggregate_data__get)
-    > Método de análise e relatórios: preço médio por rota e classe de serviço, total de assentos disponíveis por rota e companhia e rota mais popular por companhia de viagem.
-3. [Write.write_data()](http://localhost:8000/docs#/Main/wrt_write_data_writer_write_data__get)
-    > Método que processamento do arquivo Parquet, no caso precisei adaptar para tivesse saída em FileResponse/Download.
-
-![fluxo](image/fluxo.gif)
-
 # Como instalar
 Considerações gerais:
 * Necessário ter Docker e Docker-compose _(ou Podman + Podman Compose)_ instalado
@@ -61,7 +54,7 @@ Considerações gerais:
 
 
 ### 1. Clone o projeto:
-```
+```c
 git clone https://github.com/rudaruda/fastapi-pyspark-mongodb-pipeline.git
 ```
 
@@ -71,7 +64,7 @@ Estando no diretório do projeto, com **Docker** ou **Podman**:
 
 | Docker | Podman _(recomendado)_ |
 |:--------:|:--------:|
-| ```docker-compose up``` | ```podman-compose up``` |
+| `docker-compose up` | `podman-compose up` |
 
 ### 3. Execute os testes no Swagger
    ![Pipeline](image/testes-compress.gif)
@@ -97,28 +90,30 @@ Depende do sistema operacional, acesse o site dos desenvolvedores para mais info
 É recomendável que faça a execução dentro do ambiente virtual do python.
    
 O **Poetry** faz isso de forma mais automática com o comando:
-```
+```c
 poetry run python <file.py> <args>
 ```
 
 Porém, é necessário ter ele instalado... para instalar digite o comando:
-```
+```c
 pip install poetry
 ```
 
-O modo tradicional de ativar o ambiente virtual do Python é com o comando:
-```
+O **modo tradicional** de ativar o **ambiente virtual** do **Python** é com o comando:
+```c
 source .venv/bin/activate
 ```
 
 **Instale as bibliotecas do Python**
+
 Estando no diretório do projeto, instale com **pip** ou **Poetry**:
 
 | pip | Poetry |
 |:-----------:|:--------------:|
-| ```pip install -r requirements.txt``` | ```poetry install```|
+| `pip install -r requirements.txt` | `poetry install`|
 
 **Instale o MongoDB**
+
 Ainda será necessário ter o **MongoDB** instalado com as mesmas configurações registradas no docker-compose:
 
 - `host: localhost / mongodb`
@@ -144,17 +139,52 @@ poetry run uvicorn app.main:app --reload
 # Como usar...
 
 _(recomendável via container)_
+
+**1. Instale a imagem**
+
 Estando no diretório do projeto, com **Docker** ou **Podman**:
 
 | Docker | Podman |
 |--------|--------|
-| ```docker-compose up``` | ```podman-compose up``` |
+| `docker-compose up` | `podman-compose up` |
+
+**2. Acesse o Swagger**
+
+Com os serviços instalados acesse o swagger [http://localhost:8000/docs](http://localhost:8000/docs)
+
+**3. Execute os testes**
+Via Swagger: [localhost:8000/docs/Testes/test_all](http://localhost:8000/docs#/Testes/mongodb_test_all_get)
+
+**4. Execute a pipeline**
+Front-end da Pipeline: [http://localhost:8000/pipe_show](http://localhost:8000/pipe_show)
 
 
 
-**Reforçando:** No Swagger podemos executar, pontualmente cada um dos métodos da pipeline, podendo repetir cada etapa. 
 
-Acesse o endpoint no link do item acima, depois (no Swagger) em "Try it out" -> "Execute" -> Visualise o resultado em "Details". A animação em cima esclarece melhor em caso de dúvida.
+
+### Como usar o Swagger
+No **Swagger** podemos executar, pontualmente cada um dos métodos da pipeline, podendo repetir cada etapa. 
+
+Acessando o Swagger:
+1. Clique em qualquer item (endpoint)
+2. Clique no botão **"Try it out"**
+3. Clique no botão **"Execute"**
+4. Visualise o resultado em **"Details"**
+
+## Caso de uso: Fluxo de Processamento da Pipeline
+![caso de uso](image/case-use.png)
+
+O diagrama representa o fluxo completo de processamento da Pipeline, que é exatamente nessa sequencia:
+1. [EventProcessor.process_events()](http://localhost:8000/docs#/Main/evt_process_events_eventprocessor_process_events__get)
+    > Método que realiza o carregamento do arquivo JSON, tratamento dos dados (limpeza e enriquecimento) e filtro dos registros
+2. [Aggregator.aggregate_data()](http://localhost:8000/docs#/Main/agg_aggregate_data_aggregator_aggregate_data__get)
+    > Método de análise e relatórios: preço médio por rota e classe de serviço, total de assentos disponíveis por rota e companhia e rota mais popular por companhia de viagem.
+3. [Write.write_data()](http://localhost:8000/docs#/Main/wrt_write_data_writer_write_data__get)
+    > Método que processamento do arquivo Parquet, no caso precisei adaptar para tivesse saída em FileResponse/Download.
+
+Abaixo a imagem demonstra a execução dos métodos dentro do Swagger:
+![fluxo](image/fluxo.gif)
+
 
 # Pipeline
 ![Pipeline](image/pipeline-speed.gif)
@@ -168,15 +198,14 @@ Para visualizar os insights você deve acessar a URL:
 
 ## Documentação da API (Swagger)
 ![arquitetura](image/docs.png)
-```
-http://localhost:8000/docs
-```
+
+`http://localhost:8000/docs`
 
 O Swagger fica disponível assim que a aplicação é executada com o comando em Docker/Podman:
 
 | Docker | Podman |
 |--------|--------|
-| ```docker-compose up``` | ```podman-compose up``` |
+| `docker-compose up` | `podman-compose up` |
 
 Teremos lá o detalhe de cada Endpoint / Função da Pipeline agrupadas por Tags / Funcionalidades. Você pode realizar as execuções de cada etapa diretamente por lá (inclusive é muito fácil).
 
