@@ -82,7 +82,7 @@ Estando no diretório do projeto, com **Docker** ou **Podman**:
 Depende do sistema operacional é preciso instalar os recursos Docker, Java, e MongoDB. Acesse o site dos desenvolvedores para mais informação:
 - [Docker/get-start](https://docs.docker.com/get-started/get-docker/)
 - [Podman/installation](https://podman.io/docs/installation)
-- [Java 11/download](!https://www.java.com/download/ie_manual.jsp) _(versão 11)_
+- [Java 11/download](https://www.java.com/download/ie_manual.jsp) _(versão 11)_
 - [MongoDB/tutorial](https://www.mongodb.com/pt-br/docs/manual/tutorial/)
 
 
