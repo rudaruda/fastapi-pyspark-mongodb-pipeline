@@ -36,7 +36,7 @@ services:
 
 
   mongo-express:
-    container_name: project.api-mongo_express
+    container_name: fastapi-mongo-express
     image: mongo-express:1.0.0
     restart: unless-stopped
     ports:

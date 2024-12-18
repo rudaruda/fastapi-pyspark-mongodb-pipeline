@@ -181,7 +181,7 @@ O diagrama representa o fluxo completo de processamento da Pipeline, que é exat
 3. [Write.write_data()](http://localhost:8000/docs#/Main/wrt_write_data_writer_write_data__get)
     > Método que processa o arquivo em Parquet, no caso precisei criar um endpoint para que existisse saída em arquivo _(FileResponse e Download)_.
 
-Abaixo a imagem demonstra a execução dos métodos dentro do Swagger:
+A imagem abaixo demonstra a execução dos métodos dentro do Swagger:
 ![fluxo](image/fluxo.gif)
 
 

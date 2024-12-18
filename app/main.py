@@ -1,11 +1,13 @@
+import argparse
 from app.api import eventProcessor, utilities, aggregator, writer
 from app.tests import test
 from fastapi import FastAPI, Request, Query, Path
 from fastapi.staticfiles import StaticFiles
 from starlette.responses import HTMLResponse, StreamingResponse, FileResponse, RedirectResponse
 from fastapi.openapi.docs import get_swagger_ui_html
+import sys
 
-descriptionx = """### Objetivo\nDesenvolver rotina de pipeline de dados, com uso das tecnologias: **PYTHON** + **PYSPARK** + **FASTAPI** + **MONGDDB** e **DOCKER**\n\nO que era para ser apenas um teste para uma vaga, se transformou numa oportunidade de fazer algo novo (pelo menos pra mim)\n\n    Então transformei isso numa experiência, que me agregou conhecimento, pois ainda não havia visto nada parecido no GitHub...\n    Espero esse projeto possa agregar em algo novo para você também\n\n## Execute os testes\n\nAqui mesmo pelo SWAGGER você poderá executar todos os métodos.\n\n[TEST_ALL](./docs#/Testes/mongodb_test_all_get) faz isso rapidamente para você. **É necessário que "Tudo esteja OK!"**\n\n## Visualize a Pipeline\n\n**Visualize em HTML**, isso mesmo! [ACESSE A PIPELINE AQUI!](http://localhost:8000/pipe_show)\n\nOu... Execute em sequência os métodos: [EventProcessor.process_events()](./Main/evt_process_events_eventprocessor_process_events__get/) > [Aggregator.aggregate_data()](./Main/agg_aggregate_data_aggregator_aggregate_data__get) > [Write.write_data()](./Main/agg_aggregate_data_writer_write_data__get)"""
+descriptionx = """### Objetivo\nDesenvolver rotina de pipeline de dados, com uso das tecnologias: **PYTHON** + **PYSPARK** + **FASTAPI** + **MONGDDB** e **DOCKER**\n\nO que era para ser apenas um teste para uma vaga, se transformou numa oportunidade de fazer algo novo (pelo menos pra mim)\n\n    Não havia visto nada parecido no GitHub...\n    Espero esse projeto possa agregar em algo novo para você também\n\n## Execute os testes\n\nAqui pelo próprio SWAGGER você pode executar todos os métodos.\n\n[TEST_ALL](./docs#/Testes/mongodb_test_all_get) faz isso rapidamente para você. **É necessário que "Tudo esteja OK!"**\n\n## Visualize a Pipeline\n\nFoi desenvolvido um frontend para a Pipeline, isso mesmo! [ACESSAR A PIPELINE](http://localhost:8000/pipe_show)\n\nOu execute em sequência os métodos: [EventProcessor.process_events()](./Main/evt_process_events_eventprocessor_process_events__get/) > [Aggregator.aggregate_data()](./Main/agg_aggregate_data_aggregator_aggregate_data__get) > [Write.write_data()](./Main/agg_aggregate_data_writer_write_data__get)"""
 
 app = FastAPI(
     title="fastapi-pyspark-mongodb-pipeline",
@@ -21,15 +23,6 @@ app = FastAPI(
 
 # Mount files statics
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
-
-
-@app.get("/docs", include_in_schema=False)
-async def swagger_ui_html():
-    return get_swagger_ui_html(
-        openapi_url="/openapi.json",
-        title="Pipeline",
-        swagger_favicon_url="/static/favicon.png"
-    )
 
 
 @app.get("/", include_in_schema=False)
@@ -364,3 +357,58 @@ def mongodb():
     """
     a = test.Tests()
     return a.execute()
+
+
+@app.get("/docs", include_in_schema=False)
+async def swagger_ui_html():
+    return get_swagger_ui_html(
+        openapi_url="/openapi.json",
+        title="Pipeline",
+        swagger_favicon_url="/static/favicon.png"
+    )
+
+
+def main(args:str):
+    if args in ['pipeline','pipe']: 
+        print('> PIPELINE start...')
+        arg = 'pipeline'
+
+    if args in ['pipeline','etl','ingest','eventprocessor','processor']:
+        print('> eventProcessor.EventProcessor(), start...')
+        event_proc = a = eventProcessor.EventProcessor()
+        df = event_proc.process_events('df') # retorna o DataFrame
+        print('> eventProcessor.EventProcessor(), finish OK!')
+        print('  DataFrame final do EventProcessor():')
+        df.show()
+
+    if args in ['pipeline','elt','aggregator','agg']:
+        print('> aggregator.Aggregator(), start...')
+        aggregator = aggregator.Aggregator()
+        aggregator_result = aggregator.aggregate_data()
+        print('> aggregator.Aggregator(), finish OK!')
+        print('  Resultado final do Aggregator():')
+        print(aggregator_result)
+    
+
+    # DataFrame TO PARQUET
+    # Write
+
+    
+    if args in ['tests','test','teste']:
+        print('> test.Tests(), start...')
+        tests = test.Tests()
+        tests_result = tests.execute()
+        print('> test.Tests(), finish OK!')
+        print('  Resultado final de Tests():')
+        print(tests_result)
+    
+
+    return 0
+
+# __main__
+if __name__ == "__main__":
+    args = "".join(sys.argv[1:])
+    print(f"args:'{args}'")
+    if args in ['pipe','pipeline','pipeline','etl','ingest','eventprocessor','processor','pipeline','elt','aggregator','agg','tests','test','teste']:
+        print("Irá executar o main()")
+        main(str(args))
