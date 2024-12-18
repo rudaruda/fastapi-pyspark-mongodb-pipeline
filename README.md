@@ -28,14 +28,12 @@ Depende do sistema operacional, acesse o site dos desenvolvedores para mais info
 ```
 git clone https://github.com/rudaruda/fastapi-pyspark-mongodb-pipeline.git
 ```
-Estando no diretório do projeto, execute o container com DOCKER:
-```
-docker-compose up
-```
-...ou com PODMAN *(recomendo)*:
-```
-podman-compose run up
-```
+
+Estando no diretório do projeto, com **Docker** ou **Podman**:
+
+| Docker | Podman |
+|--------|--------|
+| ```docker-compose up``` | ```podman-compose up``` |
 
 ### Testes
 ![Pipeline](image/testes-compress.gif)
@@ -105,12 +103,11 @@ Para visualizar os insights você deve acessar a URL:
 http://localhost:8000/docs
 ```
 
-Estando no diretório do projeto, com **Docker** ou **Podman**:
+O Swagger fica disponível assim que a aplicação é executada com o comando em Docker/Podman:
 
-   | Docker | Podman |
-   |--------|--------|
-   | ```docker-compose up``` | ```podman-compose up``` |
-
+| Docker | Podman |
+|--------|--------|
+| ```docker-compose up``` | ```podman-compose up``` |
 
 Lá temos o detalhe de cada endpoint/função do Pipeline agrupadas por Tags/Funcionalidade. Você pode realizar as execuções de cada etapa diretamente por lá (inclusive é muito fácil).
 
