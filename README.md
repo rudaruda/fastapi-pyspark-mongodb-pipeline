@@ -181,7 +181,7 @@ O diagrama representa o fluxo completo de processamento da Pipeline, que é exat
 2. [Aggregator.aggregate_data()](http://localhost:8000/docs#/Main/agg_aggregate_data_aggregator_aggregate_data__get)
     > Método de análise e relatórios: preço médio por rota e classe de serviço, total de assentos disponíveis por rota e companhia e rota mais popular por companhia de viagem.
 3. [Write.write_data()](http://localhost:8000/docs#/Main/wrt_write_data_writer_write_data__get)
-    > Método que processamento do arquivo Parquet, no caso precisei adaptar para tivesse saída em FileResponse/Download.
+    > Método que processa o arquivo em Parquet, no caso precisei criar um endpoint para que existisse saída em arquivo _(FileResponse e Download)_.
 
 Abaixo a imagem demonstra a execução dos métodos dentro do Swagger:
 ![fluxo](image/fluxo.gif)
@@ -214,7 +214,7 @@ Teremos lá o detalhe de cada Endpoint / Função da Pipeline agrupadas por Tags
 Documentação nunca é demais.
 Temos o Readme aqui do github, com imagens e gifs animados e além disso temos o Swagger que fica automaticamente disponível quando fazemos uso do FastAPI no desenvolvimento.
 
-A construção do Dockerfile inicialmente pode ser complexa, mas depois que consegue identificar a imagem correta e versões do recursos corretos, o desenvolvimento fica muito mais fluído. Uma grande descoberta para mim foi o PODMAN, ele realmente consome menos recurso da máquina e fica melhor de desenvolver.
+A construção do Dockerfile inicialmente pode ser complexa, mas depois que consegue identificar a imagem correta e versões do recursos corretos, o desenvolvimento fica muito mais fluido. Uma grande descoberta para mim foi o PODMAN, ele realmente consome menos recurso da máquina e fica melhor de desenvolver.
 
 Visualizar a Pipeline em HTML, penso que faz muito sentido. Por isso coloquei esse esforço adicional no projeto. Porque quando falamos de dados sempre queremos **visualizar os dados**, já em backend parece que sempre ficam "escondidos". Precisamos fazer uso dos recursos para "mostrar nosso ouro".
 
