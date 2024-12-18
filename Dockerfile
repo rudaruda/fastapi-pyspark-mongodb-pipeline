@@ -7,6 +7,7 @@ ENV JAVA_HOME=/opt/java/openjdk
 COPY --from=eclipse-temurin:11-jre $JAVA_HOME $JAVA_HOME
 # Garante que o JAVA seja "considerado" pelo sistema
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
+ENV PYTHONPATH="/code"
 # Define WORKDIR
 WORKDIR /code
 # Copia requirements.txt para o root
@@ -25,4 +26,4 @@ EXPOSE 8000
 RUN java --version
 RUN echo $JAVA_HOME
 # Start do serviço FastAPI
-CMD ["uvicorn", "app.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.app:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]

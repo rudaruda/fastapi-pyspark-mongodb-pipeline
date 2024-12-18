@@ -218,4 +218,16 @@ Visualizar a Pipeline em HTML, penso que faz muito sentido. Por isso coloquei es
 
 Acaba existindo um esforço adicional para desenvolver as Classes, Funções e também os endpoints da API. Porém, no final a qualidade fica superior. Temos acesso detalhe maior de cada funcionalidade desenvolvida, penso em até padronizar meus próximos desenvolvimento todos com FastAPI, mesmo que para objetivos mais simples.
 
-Me diverti com esse teste e resolvi fazer dele um experiência, algo que eu pudesse aprender alguma coisa nova. E no caso foi conectar tecnologias com foco na entrega end-to-end.
+Me diverti com esse teste e resolvi fazer dele um experiência, algo que eu pudesse fazer algo novo. E no caso foi conectar tecnologias com foco na entrega end-to-end.
+
+# Monitoramento
+
+- Acessar container via terminal:
+  ```c
+  podman exec -it fastapi-spark-pipeline bash
+  ```
+
+- Forçar atualização da imagem docker-compose
+   ```c
+   podman-compose build --no-cache
+   ```
