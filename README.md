@@ -77,15 +77,16 @@ Estando no diretório do projeto, com **Docker** ou **Podman**:
 
 ### 4. Executatando localmente...
 
-#### 4.1 Instale as dependencias
+##### 4.1 Instale as dependencias
 
-Depende do sistema operacional, acesse o site dos desenvolvedores para mais informação:
+Depende do sistema operacional é preciso instalar os recursos Docker, Java, e MongoDB. Acesse o site dos desenvolvedores para mais informação:
 - [Docker/get-start](https://docs.docker.com/get-started/get-docker/)
 - [Podman/installation](https://podman.io/docs/installation)
-- [Java/download](!https://www.java.com/download/ie_manual.jsp) _(versão 11)_
+- [Java 11/download](!https://www.java.com/download/ie_manual.jsp) _(versão 11)_
+- [MongoDB/tutorial](https://www.mongodb.com/pt-br/docs/manual/tutorial/)
 
 
-**Ative o ambiente virtual**
+##### 4.2 Ative o ambiente virtual
 
 É recomendável que faça a execução dentro do ambiente virtual do python.
    
@@ -104,7 +105,7 @@ O **modo tradicional** de ativar o **ambiente virtual** do **Python** é com o c
 source .venv/bin/activate
 ```
 
-**Instale as bibliotecas do Python**
+##### 4.3 Instale as bibliotecas do Python
 
 Estando no diretório do projeto, instale com **pip** ou **Poetry**:
 
@@ -112,7 +113,7 @@ Estando no diretório do projeto, instale com **pip** ou **Poetry**:
 |:-----------:|:--------------:|
 | `pip install -r requirements.txt` | `poetry install`|
 
-**Instale o MongoDB**
+##### 4.4 Instale o MongoDB
 
 Ainda será necessário ter o **MongoDB** instalado com as mesmas configurações registradas no docker-compose:
 
@@ -123,7 +124,7 @@ Ainda será necessário ter o **MongoDB** instalado com as mesmas configuraçõe
 
 **Dada a complexidade... É ALTAMENTE RECOMENDÁVEL** que execute o projeto **somente pelo container**.
 
-#### 4.2 Execute o uvicorn
+##### 4.5 Execute o uvicorn
 É preciso executar o servidor da aplicação web para que a Api e Swagger fiquem ativos.
 
 Estando no diretório raiz do projeto:
