@@ -109,7 +109,7 @@ O Swagger fica disponível assim que a aplicação é executada com o comando em
 |--------|--------|
 | ```docker-compose up``` | ```podman-compose up``` |
 
-Lá temos o detalhe de cada endpoint/função do Pipeline agrupadas por Tags/Funcionalidade. Você pode realizar as execuções de cada etapa diretamente por lá (inclusive é muito fácil).
+Teremos lá o detalhe de cada Endpoint / Função da Pipeline agrupadas por Tags / Funcionalidades. Você pode realizar as execuções de cada etapa diretamente por lá (inclusive é muito fácil).
 
 # Conclusão
 Documentação nunca é demais.
