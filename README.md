@@ -50,7 +50,6 @@ Considerações gerais:
 ### Pré-requisitos:
 
 - [Docker/get-start](https://docs.docker.com/get-started/get-docker/) ou [Podman/installation](https://podman.io/docs/installation)
-- [Podman/installation](https://podman.io/docs/installation)
 
 
 ### 1. Clone o projeto:
