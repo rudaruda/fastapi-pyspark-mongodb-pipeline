@@ -4,46 +4,7 @@ Projeto experimental de **Pipeline de dados** com **FASTAPI + PYSPARK + MONGODB*
 Basicamente a ideia é manipular os dados com PYSPARK armazenada snapshot do DataFrames no MONGODB a cada transformação. 
 E no final apresentar a evolução do pipeline de forma visualmente (isso mesmo em HTML como se fosse um front).
 
-## Como utilizar
-* Necessário ter Docker e Docker-compose (ou Podman + Podman Compose) instalado
-* Utilizar o comando `docker-compose up` ou `podman-compose up` no diretório do repositório
-* Aplicação roda em [http://0.0.0.0:8000/](http://0.0.0.0:8000/) ou [http://localhost:8000/](http://localhost:8000/) por padrão
-* Verificar a [documentação](http://localhost:8000/docs): ([http://localhost:8000/docs](http://localhost:8000/docs));
-* Caso queira rodar fora do Container, instalar as bibliotecas `requirements.txt` e execute os arquivos em python.
-
-### Pré-requisitos:
-
-- DOCKER / PODMAN 
-- JAVA 11
-
-#### Instalando as dependencies
-
-Depende do sistema operacional, acesse o site dos desenvolvedores para mais informação:
- - [Docker/get-start](https://docs.docker.com/get-started/get-docker/)
- - [Podman/installation](https://podman.io/docs/installation)
- - [Java](!https://www.java.com/download/ie_manual.jsp)
-
-### Executando localmente
-- Clone o projeto:
-```
-git clone https://github.com/rudaruda/fastapi-pyspark-mongodb-pipeline.git
-```
-
-Estando no diretório do projeto, com **Docker** ou **Podman**:
-
-| Docker | Podman |
-|--------|--------|
-| ```docker-compose up``` | ```podman-compose up``` |
-
-### Testes
-![Pipeline](image/testes-compress.gif)
-
-Todos os testes podem ser executados diretamente pelo Swagger:
-- [localhost:8000/docs/Testes/test_all](http://localhost:8000/docs#/Testes/mongodb_test_all_get)
-    > Reforço que temos no Swagger a documentação mais detalhada de cada serviço/funcionalidade.
-- Ou executando o método `Test.execute()` em `/app/tests/test.py`
-
-# Arquitetura da solução
+# Arquitetura
 ![arquitetura](image/pipeline-fastapi-arquitetura.drawio.png)
 
 **Dockerfile** com imagem *python:3.12-slim* que sustenta nossa aplicação em **Python** com **FastAPI**. Por sua vez esta se conectando com **PySpark** e realiza a manipulação de dados. A cada alteração do DataFrame é persistindo um snapshop dos dados no **MongoDB**. 
@@ -85,7 +46,115 @@ O diagrama representa o fluxo completo de processamento da Pipeline, que é exat
 
 ![fluxo](image/fluxo.gif)
 
-**Reforçando!** Pelo Swagger pode executar, pontualmente cada um desses métodos. Basca acessar o endpoint no link do item acima, depois (no Swagger) em "Try it out" -> "Execute" -> Visualise o resultado em "Details". A animação em cima esclarece melhor em caso de dúvida.
+# Como instalar
+Considerações gerais:
+* Necessário ter Docker e Docker-compose _(ou Podman + Podman Compose)_ instalado
+* Utilizar o comando `docker-compose up` ou `podman-compose up` no diretório do repositório
+* Aplicação deve ser executada em [http://0.0.0.0:8000/](http://0.0.0.0:8000/) ou [http://localhost:8000/](http://localhost:8000/)
+* Ler a [documentação](http://localhost:8000/docs): ([http://localhost:8000/docs](http://localhost:8000/docs));
+* Caso queira executar fora do Container, instalar as bibliotecas `requirements.txt` e execute os arquivos em python.
+
+### Pré-requisitos:
+
+- DOCKER / PODMAN 
+- JAVA 11
+
+
+### 1. Clone o projeto:
+```
+git clone https://github.com/rudaruda/fastapi-pyspark-mongodb-pipeline.git
+```
+
+### 2. Instale imagem do docker-compose:
+
+Estando no diretório do projeto, com **Docker** ou **Podman**:
+
+| Docker | Podman _(recomendado)_ |
+|:--------:|:--------:|
+| ```docker-compose up``` | ```podman-compose up``` |
+
+### 3. Execute os testes no Swagger
+   ![Pipeline](image/testes-compress.gif)
+
+   Todos os testes podem ser executados diretamente pelo Swagger:
+   - [localhost:8000/docs/Testes/test_all](http://localhost:8000/docs#/Testes/mongodb_test_all_get)
+     > Reforço: No Swagger temos a documentação mais detalhada de cada endpoint / funcionalidade
+   - Ou executando o método `Test.execute()` em `/app/tests/test.py`
+
+
+### 4. Executatando localmente...
+
+#### 4.1 Instale as dependencias
+
+Depende do sistema operacional, acesse o site dos desenvolvedores para mais informação:
+- [Docker/get-start](https://docs.docker.com/get-started/get-docker/)
+- [Podman/installation](https://podman.io/docs/installation)
+- [Java/download](!https://www.java.com/download/ie_manual.jsp) _(versão 11)_
+
+
+**Ative o ambiente virtual**
+
+É recomendável que faça a execução dentro do ambiente virtual do python.
+   
+O **Poetry** faz isso de forma mais automática com o comando:
+```
+poetry run python <file.py> <args>
+```
+
+Porém, é necessário ter ele instalado... para instalar digite o comando:
+```
+pip install poetry
+```
+
+O modo tradicional de ativar o ambiente virtual do Python é com o comando:
+```
+source .venv/bin/activate
+```
+
+**Instale as bibliotecas do Python**
+Estando no diretório do projeto, instale com **pip** ou **Poetry**:
+
+| pip | Poetry |
+|:-----------:|:--------------:|
+| ```pip install -r requirements.txt``` | ```poetry install```|
+
+**Instale o MongoDB**
+Ainda será necessário ter o **MongoDB** instalado com as mesmas configurações registradas no docker-compose:
+
+- `host: localhost / mongodb`
+- `port: 27017`
+- `user: root`
+- `password: root`
+
+**Dada a complexidade... É ALTAMENTE RECOMENDÁVEL** que execute o projeto **somente pelo container**.
+
+#### 4.2 Execute o uvicorn
+É preciso executar o servidor da aplicação web para que a Api e Swagger fiquem ativos.
+
+Estando no diretório raiz do projeto:
+```c
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+ou com **Poetry**
+```c
+poetry run uvicorn app.main:app --reload
+````
+
+# Como usar...
+
+_(recomendável via container)_
+Estando no diretório do projeto, com **Docker** ou **Podman**:
+
+| Docker | Podman |
+|--------|--------|
+| ```docker-compose up``` | ```podman-compose up``` |
+
+
+
+**Reforçando:** No Swagger podemos executar, pontualmente cada um dos métodos da pipeline, podendo repetir cada etapa. 
+
+Acesse o endpoint no link do item acima, depois (no Swagger) em "Try it out" -> "Execute" -> Visualise o resultado em "Details". A animação em cima esclarece melhor em caso de dúvida.
 
 # Pipeline
 ![Pipeline](image/pipeline-speed.gif)
