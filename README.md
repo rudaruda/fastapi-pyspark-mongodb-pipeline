@@ -53,13 +53,13 @@ O MongoExpress esta aqui somente como utilitário, para visualizar os dados pers
 
 | :city_sunrise: |Aplicação| O que é|
 |-----|:-----:|-------------|
-| <img src="images/fastapi_icon.png" alt="fastapi ico" style="width:200px; height:100%"> | **[FastAPI](https://fastapi.tiangolo.com/)**| Framework web Python, rápido e moderno, para criar APIs com suporte a validações automáticas e documentação integrada.|
-| <img src="images/pyspark_icon.png" alt="pyspark ico" style="width:200px; height:100%"> | **[PySpark](https://spark.apache.org/docs/latest/api/python/index.html)** | Interface Python para o Apache Spark, usada para processamento distribuído de grandes volumes de dados em cluster. |
-| <img src="images/mongodb_icon.png" alt="mongodb ico" style="width:200px; height:100%"> | **[MongoDB](https://www.mongodb.com/pt-br/docs/manual/administration/install-community/)** | Banco de dados NoSQL orientado a documentos, que armazena dados em formato JSON-like (BSON), permitindo flexibilidade e escalabilidade para aplicações modernas. |
-| <img src="images/docker_icon.png" alt="docker ico" style="width:200px; height:100%"> | **[Docker](https://www.docker.com/get-started/)** | Plataforma para criar, distribuir e executar aplicações em containers isolados.|
-| <img src="images/podman_icon.png" alt="podman ico" style="width:200px; height:100%"> | **[Podman](https://podman.io/get-started)** | Alternativa para executar container em relação ao Docker. Consome menos recursos de máquina no desenvolvimento local ***(super recomendo!)*** :rocket:.|
+| <img src="image/fastapi_icon.png" alt="fastapi ico" style="width:200px; height:100%"> | **[FastAPI](https://fastapi.tiangolo.com/)**| Framework web Python, rápido e moderno, para criar APIs com suporte a validações automáticas e documentação integrada.|
+| <img src="image/pyspark_icon.png" alt="pyspark ico" style="width:200px; height:100%"> | **[PySpark](https://spark.apache.org/docs/latest/api/python/index.html)** | Interface Python para o Apache Spark, usada para processamento distribuído de grandes volumes de dados em cluster. |
+| <img src="image/mongodb_icon.jpg" alt="mongodb ico" style="width:200px; height:100%"> | **[MongoDB](https://www.mongodb.com/pt-br/docs/manual/administration/install-community/)** | Banco de dados NoSQL orientado a documentos, que armazena dados em formato JSON-like (BSON), permitindo flexibilidade e escalabilidade para aplicações modernas. |
+| <img src="image/docker_icon.png" alt="docker ico" style="width:200px; height:100%"> | **[Docker](https://www.docker.com/get-started/)** | Plataforma para criar, distribuir e executar aplicações em containers isolados.|
+| <img src="image/podman_icon.png" alt="podman ico" style="width:200px; height:100%"> | **[Podman](https://podman.io/get-started)** | Alternativa para executar container em relação ao Docker. Consome menos recursos de máquina no desenvolvimento local ***(super recomendo!)*** :rocket:.|
 
-### Estrutura principal de diretórios do projeto
+### Estrutura principal de diretórios
     root
     ├── docker-compose.yml
     ├── dockerfile.yml
@@ -104,13 +104,14 @@ Para visualizar os insights você deve acessar a URL:
 ```
 http://localhost:8000/docs
 ```
-O Swagger fica disponível assim que a aplicação é executada com o comando em Docker/Podman:
-```
-docker-compose up
-```
-```
-podman-compose up
-```
+
+Estando no diretório do projeto, com **Docker** ou **Podman**:
+
+   | Docker | Podman |
+   |--------|--------|
+   | ```docker-compose up``` | ```podman-compose up``` |
+
+
 Lá temos o detalhe de cada endpoint/função do Pipeline agrupadas por Tags/Funcionalidade. Você pode realizar as execuções de cada etapa diretamente por lá (inclusive é muito fácil).
 
 # Conclusão
