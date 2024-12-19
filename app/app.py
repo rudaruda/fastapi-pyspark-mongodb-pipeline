@@ -194,6 +194,8 @@ def wrt_write_data():
     Writer.write_data
 
     *■ Salve os dados processados em Parquet.*
+
+    Os arquivos ficam disponíveis também no diretório `/parquet_files/dados`
     """
     a = writer.Writer()
     r = a.write_data()

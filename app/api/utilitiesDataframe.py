@@ -39,8 +39,13 @@ def dfGetMongo()->DataFrame:
         {"dataframe": {"$exists": True, "$ne": None}, "schema": {"$exists": True, "$ne": None}}
         ,{"dataframe": 1, "schema": 1, "_id": 0}
         ).sort("dthr", -1).limit(1)
-    x_data, x_schema= x_df[0]['dataframe'], x_df[0]['schema']
-    return spark.createDataFrame(data=eval(x_data),schema=eval(x_schema))
+    try:
+        x_data, x_schema= x_df[0]['dataframe'], x_df[0]['schema']
+        return spark.createDataFrame(data=eval(x_data),schema=eval(x_schema))
+    except:
+        t = 'Falha! NÃO EXISTE NENHUM DATAFRAME SALVO MONGODB! Execute o eventProcessor.EventProcessor() ou o Pipeline'
+        print(t)
+        return t
 
 
 def dfOutput(x_type:str, x_dataframe:DataFrame, x_title:str='Retorno HTML', x_comment:str=None):
@@ -62,7 +67,7 @@ def dfContactTwoCols(new_col:str, x_col1:str, x_col2:str, x_dataframe:DataFrame)
     if x_col1 in x_cols and x_col2 in x_cols and not new_col in x_cols: 
         x_dataframe = x_dataframe.withColumn( new_col, F.concat( F.col(x_col1), F.lit(" "), F.col(x_col2)))
         dfToMongo(x_dataframe,'dfContactTwoCols','concatenou colunas')
-        print(f'* concatenou: {new_col}={x_col1}+{x_col2}')
+        print(f'*  concat: {new_col}={x_col1}+{x_col2}')
     return x_dataframe
 
 

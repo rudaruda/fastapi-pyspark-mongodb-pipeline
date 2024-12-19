@@ -105,50 +105,50 @@ class Tests:
 
     def execute(self):
         try:
-            c, t = 0, []
+            c, f, t = 1, 0, []
             # Testando diferentes funções e atualizando o set de falhas
             if self.test(read_file_json) is False: 
+                f+=1
                 v='Falha Arquivo JSON'
                 t.append(v)
-                print(v)
-                c+=1
             else:
-                t.append('1. Simples carregamento de arquivo JSON: OK!')
+                t.append('Simples carregamento de arquivo JSON: OK!')
             
+            c+=1
             if self.test(enviroment_get) is False: 
+                f+=1
                 v='Falha ENVIRONMENTS VARS'
                 t.append(v)
-                print(v)
-                c+=1
             else:
-                t.append('Teste variavéis de ambiente: OK!')
+                t.append('Teste variáveis de ambiente: OK!')
             
+            c+=1
             if self.test(mongodb_insert) is False: 
+                f+=1
                 v='Falha MONGO'
-                t.add(v)
-                print(v)
-                c+=1
+                t.append(v)
             else:
                 t.append('Conectividade com MongoDB: OK!')
             
+            c+=1
             if self.test(spark_create_dataframe) is False: 
+                f+=1
                 v='Falha SPARK, create dataframe'
                 t.append(v)
-                print(v)
-                c+=1
             else:
                 t.append('Conectividade com SPARK: OK!')
             
+            c+=1
             if self.test(spark_load_file) is False: 
+                f+=1
                 v='Falha SPARK, load file'
                 t.append(v)
-                print(v)
-                c+=1
             else:
                 t.append('Teste de carregar arquivo JSON com SPARK: OK!')
             
             # Verificando o estado dos testes
-            if c==0:
+            c+=1
+            if f==0:
                 v='Tudo OK!'
                 t.append(v)
                 print(v)

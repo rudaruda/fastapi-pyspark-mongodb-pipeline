@@ -1,4 +1,6 @@
 # MongoDB temp files
+/data/db/*
+/data/db/
 /data/mongodb/*
 /data/mongodb_data/
 /data/mongodb_data/*

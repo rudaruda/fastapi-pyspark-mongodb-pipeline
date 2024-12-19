@@ -65,13 +65,39 @@ Estando no diretório do projeto, com **Docker** ou **Podman**:
 |:--------:|:--------:|
 | `docker-compose up` | `podman-compose up` |
 
-### 3. Execute os testes no Swagger
+### 3. Execute os testes
+
+   #### Testes pelo Swagger
+   _(caminho mais fácil)_
+
    ![Pipeline](image/testes-compress.gif)
 
    Todos os testes podem ser executados diretamente pelo Swagger:
    - [localhost:8000/docs/Testes/test_all](http://localhost:8000/docs#/Testes/mongodb_test_all_get)
      > Reforço: No Swagger temos a documentação mais detalhada de cada endpoint / funcionalidade
    - Ou executando o método `Test.execute()` em `/app/tests/test.py`
+
+   #### Testes pelo terminal de comando
+   
+   **Acessando o container**
+
+   Verifique se o container `fastapi-spark-pipeline` esta ativo:
+   ```
+   podman stats -a --no-stream
+   ```
+   ![stats via terminal](image/stats.png)
+
+   Acesse o container com o comando:
+   ```c
+   podman exec -it fastapi-spark-pipeline bash
+   ```
+
+   Estando dentro do container, no diretório `\code` execute o script:
+   ```c
+   python app/main.py pipeline
+   ```
+
+   ![tests via terminal](image/tests.png)
 
 
 ### 4. Executatando localmente...
@@ -126,14 +152,10 @@ Ainda será necessário ter o **MongoDB** instalado com as mesmas configuraçõe
 É preciso executar o servidor da aplicação web para que a Api e Swagger fiquem ativos.
 
 Estando no diretório raiz do projeto:
-```c
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-```
 
-ou com **Poetry**
-```c
-poetry run uvicorn app.main:app --reload
-```
+| Python | com Poetry |
+|------------|------------|
+| `uvicorn app.main:app --reload --host 0.0.0.0 --port 8000` | `poetry run uvicorn app.main:app --reload` |
 
 # Como usar...
 
@@ -141,7 +163,7 @@ _(recomendável via container)_
 
 **1. Instale a imagem**
 
-Estando no diretório do projeto, com **Docker** ou **Podman**:
+Aqui iremos ativar o servidor web junto com outros serviços do projetos. Estando no diretório do projeto, com **Docker** ou **Podman**:
 
 | Docker | Podman |
 |--------|--------|
@@ -155,10 +177,8 @@ Com os serviços instalados acesse o swagger [http://localhost:8000/docs](http:/
 Via Swagger: [localhost:8000/docs/Testes/test_all](http://localhost:8000/docs#/Testes/mongodb_test_all_get)
 
 **4. Execute a pipeline**
+
 Front-end da Pipeline: [http://localhost:8000/pipe_show](http://localhost:8000/pipe_show)
-
-
-
 
 
 ### Como usar o Swagger
@@ -186,14 +206,41 @@ A imagem abaixo demonstra a execução dos métodos dentro do Swagger:
 
 
 # Pipeline
-![Pipeline](image/pipeline-speed.gif)
+
+#### Via Swagger
+
+_(caminho mais fácil)_
+
+Garantindo que servidor web esta ativo. _Consulte ['como usar'](#comousar...) para mais detalhes._
 
 Você pode executar a pipeline através da URL com visualização HTML: 
 - [http://localhost:8000/pipe_show](http://localhost:8000/pipe_show)
     > Aqui esta sendo executado process_events, aggregate_data e write_data em sequencia. No final aparece link para fazer Download do arquivo Parquet ou Visualizar os Insights.
+
+  ![Pipeline](image/pipeline-speed.gif)
+
 Para visualizar os insights você deve acessar a URL: 
 - [http://localhost:8000/pipe_insights](http://localhost:8000/pipe_insights)
     > Executando as análises: relatório de preço médio por rota e classe de serviço, total de assentos disponíveis por rota e companhia e rota mais popular por companhia de viagem.
+
+Além da opção de Download os arquivos PARQUET ficam disponíveis no diretório `/parquet_files/dados`.
+
+#### Por linha de comando
+
+- Acesse o container com o comando:
+   ```c
+   podman exec -it fastapi-spark-pipeline bash
+   ```
+
+   _Consulte ['Testes via terminal de comando'](####testespeloterminaldecomando...) para mais detalhes._
+
+- Estando dentro do container, no diretório `\code` execute o script:
+   ```c
+   python app/main.py pipeline
+   ```
+   
+   ![pipeline via terminal](image/pipeline_terminal.gif)
+
 
 ## Documentação da API (Swagger)
 ![arquitetura](image/docs.png)
@@ -218,7 +265,7 @@ Visualizar a Pipeline em HTML, penso que faz muito sentido. Por isso coloquei es
 
 Acaba existindo um esforço adicional para desenvolver as Classes, Funções e também os endpoints da API. Porém, no final a qualidade fica superior. Temos acesso detalhe maior de cada funcionalidade desenvolvida, penso em até padronizar meus próximos desenvolvimento todos com FastAPI, mesmo que para objetivos mais simples.
 
-Me diverti com esse teste e resolvi fazer dele um experiência, algo que eu pudesse fazer algo novo. E no caso foi conectar tecnologias com foco na entrega end-to-end.
+Me diverti com esse teste e resolvi fazer dele um experiência, algo que eu pudesse fazer algo novo, conectando tecnologias com foco na entrega end-to-end.
 
 # Monitoramento
 
@@ -231,3 +278,10 @@ Me diverti com esse teste e resolvi fazer dele um experiência, algo que eu pude
    ```c
    podman-compose build --no-cache
    ```
+
+- Listar containers ativos:
+   ```c
+   podman stats -a --no-stream
+   ```
+
+- Mongo Express, acessado por

@@ -21,7 +21,7 @@ services:
     image: mongo:8
     restart: unless-stopped
     volumes:
-      - ./data/mongo_data:/data/db
+      - ./data/db/mongo_data:/data/db
       - ./data/mongod.conf:/etc/mongo/mongod.conf
     command: [ "mongod", "--config", "/etc/mongo/mongod.conf" ]
     env_file:
