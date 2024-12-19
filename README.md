@@ -305,6 +305,6 @@ Me diverti com esse teste e resolvi fazer dele um experiência, algo que eu pude
 - Mongo Express pode ser acessado em [http://localhost:8081](http://localhost:8081) `user: root, password: root`
    ![mongoexpress](image/mongoexpress.png)
 
-   Nele podemos visualizar com detalhes todos do DataFrames gravados em cada etapa do processo.
+   Nele podemos visualizar com detalhes todos do DataFrames gravados em cada etapa do processo, dentro do database `project`
 
    ![mongoexpress](image/mongoexpress_detalhe.png)

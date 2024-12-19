@@ -6,6 +6,8 @@
 /data/mongodb_data/*
 data/mongodb_data
 mongo_data/
+/parquet_files/dados/
+/parquet_files
 *.wt
 metrics.interim
 
