@@ -204,6 +204,24 @@ O diagrama representa o fluxo completo de processamento da Pipeline, que é exat
 A imagem abaixo demonstra a execução dos métodos dentro do Swagger:
 ![fluxo](image/fluxo.gif)
 
+É possível executar a mesma sequencia, por **linha de comando**:
+
+0. Acesse o container, garantindo que esteja no diretório `/code`:
+   ```
+   podman exec -it fastapi-spark-pipeline bash
+   ```
+1. Execute EventProcessor.process_events():
+   ```
+   python app/main.py eventprocessor
+   ```
+2. Execute Aggregator.aggregate_data():
+   ```
+   python app/main.py aggregator
+   ```
+3. Execute Write.write_data():
+   ```
+   python app/main.py write
+   ```
 
 # Pipeline
 
@@ -284,4 +302,9 @@ Me diverti com esse teste e resolvi fazer dele um experiência, algo que eu pude
    podman stats -a --no-stream
    ```
 
-- Mongo Express, acessado por
+- Mongo Express pode ser acessado em [http://localhost:8081](http://localhost:8081) `user: root, password: root`
+   ![mongoexpress](image/mongoexpress.png)
+
+   Nele podemos visualizar com detalhes todos do DataFrames gravados em cada etapa do processo.
+
+   ![mongoexpress](image/mongoexpress_detalhe.png)
